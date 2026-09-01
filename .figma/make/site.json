@@ -1,0 +1,10 @@
+{
+  "description": "Transforms detailed website designs into fully functional, pixel-perfect websites for designers and developers seeking precise implementation.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

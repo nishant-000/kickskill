@@ -1,0 +1,210 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-foreground: rgba(255, 255, 255, 0.92);
+  --color-background: rgb(0, 0, 0);
+  --color-muted-foreground: rgba(255, 255, 255, 0.38);
+  --color-muted: rgba(255, 255, 255, 0.04);
+  --color-primary: rgb(124, 58, 237);
+  --color-primary-foreground: rgba(255, 255, 255, 0.95);
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #ffffff 40%,
+    #a78bfa 50%,
+    #e0e7ff 55%,
+    #ffffff 65%,
+    #ffffff 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── AnimeNavBar shine sweep ─────────────────────────────────── */
+@keyframes shine {
+  0%   { transform: translateX(-100%); }
+  50%  { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ── Sidebar label fade-in ────────────────────────────────────── */
+@keyframes sidebar-label-in {
+  from { opacity: 0; transform: translateX(-4px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.sidebar-label {
+  animation: sidebar-label-in 0.18s ease-out 0.18s both;
+}
+
+/* ── GooeySearch dark-theme wrapper ──────────────────────────── */
+.ks-search-wrap {
+  --foreground: rgb(14, 10, 26);
+  --background: rgba(255, 255, 255, 0.68);
+}
+
+/* ── GooeySearchBar ───────────────────────────────────────────── */
+.gsb-outer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+@keyframes gsb-spin {
+  to { transform: rotate(360deg); }
+}
+
+.gsb-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  filter: url(#goo-effect);
+}
+.gsb-wrapper.gsb-no-goo {
+  filter: none;
+}
+
+.gsb-button-content {
+  position: relative;
+  height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.gsb-button-content-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 44px;
+}
+
+.gsb-search-btn {
+  position: relative;
+  z-index: 1;
+  height: 44px;
+  border-radius: 22px;
+  background: rgb(12, 8, 22);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0 18px;
+  color: white;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.gsb-search-text {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.65);
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: 0.01em;
+}
+
+.gsb-search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 0.875rem;
+  width: 100%;
+  padding: 0 6px;
+  letter-spacing: 0.01em;
+}
+.gsb-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.gsb-search-results {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.gsb-search-result {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 44px;
+  border-radius: 22px;
+  background: rgb(16, 10, 28);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  cursor: pointer;
+  color: white;
+  pointer-events: auto;
+}
+.gsb-search-result:hover {
+  background: rgb(22, 15, 38);
+}
+
+.gsb-search-result-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.gsb-info-icon {
+  width: 14px;
+  height: 14px;
+  color: rgba(167, 139, 250, 0.7);
+  flex-shrink: 0;
+}
+
+.gsb-separate-element {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 22px;
+  background: rgb(12, 8, 22);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.gsb-separate-element--active {
+  background: rgb(80, 40, 140);
+  border-color: rgba(167, 139, 250, 0.35);
+}
+
+.gsb-loading-icon {
+  width: 18px;
+  height: 18px;
+  animation: gsb-spin 1s linear infinite;
+}
+/* ──────────────────────────────────────────────────────────────── */
