@@ -205,19 +205,19 @@ export default function CareerGoalPage({ onNavigate }: CareerGoalPageProps) {
 
   return (
     <div className="h-full overflow-y-auto overflow-x-hidden bg-black">
-      <div className="max-w-[1100px] mx-auto px-6 py-8">
+      <div className="max-w-[1100px] mx-auto px-4 sm:px-6 py-4 sm:py-8 pl-16 sm:pl-16">
 
         {/* Header */}
-        <div className="flex items-start justify-between mb-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 sm:mb-8">
           <div>
-            <div className="flex items-center gap-3 mb-1">
-              <h1 className="text-3xl font-bold text-white/92">Career Goal</h1>
+            <div className="flex items-center gap-3 mb-1 flex-wrap">
+              <h1 className="text-2xl sm:text-3xl font-bold text-white/92">Career Goal</h1>
               <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-violet-500/8 border border-violet-500/15 text-violet-400/80 text-[11px] font-semibold tracking-wide">
                 <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
                 CAREER GOAL ACTIVE
               </span>
             </div>
-            <p className="text-sm text-white/38">Tell KickSkill where you want to go. It will help you figure out how to get there.</p>
+            <p className="text-xs sm:text-sm text-white/38">Tell KickSkill where you want to go. It will help you figure out how to get there.</p>
           </div>
         </div>
 

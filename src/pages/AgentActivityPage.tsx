@@ -391,22 +391,22 @@ export default function AgentActivityPage({ onNavigate }: AgentActivityPageProps
 
   return (
     <div className="h-full overflow-y-auto overflow-x-hidden bg-black">
-      <div className="max-w-[1100px] mx-auto px-6 py-8">
+      <div className="max-w-[1100px] mx-auto px-4 sm:px-6 py-4 sm:py-8 pl-16 sm:pl-16">
 
         {/* Header */}
-        <div className="flex items-start justify-between mb-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 sm:mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-white/92 mb-1">Agent Activity</h1>
-            <p className="text-sm text-white/38">See what KickSkill is doing for your career.</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-white/92 mb-1">Agent Activity</h1>
+            <p className="text-xs sm:text-sm text-white/38">See what KickSkill is doing for your career.</p>
           </div>
-          <div className="flex items-center gap-2 ml-4 shrink-0">
+          <div className="flex items-center gap-2 shrink-0 flex-wrap">
             <InteractiveHoverButton
               text="Agent Settings"
-              className="w-36 text-xs text-white/70 border-white/10"
+              className="w-32 sm:w-36 text-xs text-white/70 border-white/10"
             />
             <button
               onClick={() => setIsPaused((p) => !p)}
-              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3.5 py-2 sm:px-4 sm:py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
                 isPaused
                   ? "bg-violet-600/18 border border-violet-500/25 text-violet-200 hover:bg-violet-600/28"
                   : "bg-white/5 border border-white/10 text-white/50 hover:text-white/80 hover:border-white/18"

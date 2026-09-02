@@ -596,29 +596,29 @@ export default function ApplicationsPage({ onNavigate }: ApplicationsPageProps) 
 
   return (
     <div className="h-full overflow-y-auto overflow-x-hidden bg-black [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-      <div className="max-w-[1100px] mx-auto px-6 py-8">
+      <div className="max-w-[1100px] mx-auto px-4 sm:px-6 py-4 sm:py-8 pl-16 sm:pl-16">
 
         {/* Header */}
-        <div className="flex items-start justify-between mb-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 sm:mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-white/92 mb-1">Applications</h1>
-            <p className="text-sm text-white/38">Track every opportunity, application and outcome in one place.</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-white/92 mb-1">Applications</h1>
+            <p className="text-xs sm:text-sm text-white/38">Track every opportunity, application and outcome in one place.</p>
           </div>
-          <div className="flex items-center gap-2 ml-4 shrink-0">
+          <div className="flex items-center gap-2 shrink-0 flex-wrap">
             <InteractiveHoverButton
               text="Opportunities"
               onClick={() => onNavigate("opportunities")}
-              className="w-36 text-xs text-white/70 border-white/10"
+              className="w-32 sm:w-36 text-xs text-white/70 border-white/10"
             />
             <InteractiveHoverButton
               text="Ask KickSkill"
-              className="w-36 text-xs text-white/70 border-violet-500/30"
+              className="w-32 sm:w-36 text-xs text-white/70 border-violet-500/30"
             />
           </div>
         </div>
 
         {/* Stats strip */}
-        <div className="grid grid-cols-5 gap-2 mb-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 mb-6">
           {[
             { label: "Total", value: stats.total, icon: <Briefcase className="w-3.5 h-3.5" />, accent: "text-white/55" },
             { label: "In Progress", value: stats.progress, icon: <Clock className="w-3.5 h-3.5" />, accent: "text-violet-300" },

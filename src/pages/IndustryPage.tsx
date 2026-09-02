@@ -30,6 +30,7 @@ import {
   Paperclip,
   ArrowUpIcon,
   LogOut,
+  Menu,
 } from "lucide-react";
 import type { Page } from "../App";
 
@@ -527,104 +528,132 @@ function IndustrySidebar({
   activeSection: IndustrySection; onSection: (s: IndustrySection) => void;
   onSwitchWorkspace: () => void; onSignOut: () => void;
 }) {
+  function handleCollapse() { onExpandChange(false); }
   function handleToggle() { onExpandChange(!expanded); }
 
   return (
     <>
-      {expanded && (
-        <div className="fixed inset-0 z-30 bg-black/40 backdrop-blur-sm lg:hidden" onClick={() => onExpandChange(false)} />
+      {/* Floating hamburger button when closed */}
+      {!expanded && (
+        <button
+          onClick={handleToggle}
+          aria-label="Open menu"
+          className="fixed top-3.5 left-3.5 sm:top-4 sm:left-4 z-40 flex items-center justify-center w-10 h-10 rounded-xl bg-black/75 hover:bg-black/90 border border-white/12 text-neutral-300 hover:text-white backdrop-blur-md shadow-xl transition-all duration-200 cursor-pointer group hover:border-white/25 active:scale-95"
+        >
+          <Menu className="w-5 h-5 transition-transform group-hover:scale-105" />
+        </button>
       )}
-      <aside className={`fixed left-0 top-0 h-full z-40 flex flex-col bg-black/80 backdrop-blur-xl border-r border-white/8 transition-all duration-300 ease-in-out overflow-hidden ${expanded ? "w-[220px]" : "w-16"}`}>
+
+      {/* Overlay backdrop when expanded */}
+      <div
+        className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+          expanded ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={handleCollapse}
+      />
+
+      {/* Slide-out drawer when expanded */}
+      <aside
+        className={`fixed left-0 top-0 bottom-0 z-50 flex flex-col
+          w-[270px] sm:w-[280px] bg-neutral-950/95 backdrop-blur-2xl border-r border-white/10
+          shadow-2xl transition-transform duration-300 ease-in-out
+          ${expanded ? "translate-x-0" : "-translate-x-full"}`}
+      >
         {/* Header */}
-        <div className={`flex h-14 items-center border-b border-white/8 shrink-0 ${expanded ? "justify-between px-4" : "justify-center"}`}>
-          {expanded && (
-            <div className="flex items-center gap-2 min-w-0">
-              <div className="w-5 h-5 rounded bg-violet-600/30 border border-violet-500/30 flex items-center justify-center shrink-0">
-                <Building2 className="w-3 h-3 text-violet-300" />
-              </div>
-              <span className="text-sm font-semibold text-white tracking-wide whitespace-nowrap truncate">KickSkill</span>
+        <div className="flex h-14 items-center justify-between px-4 border-b border-white/8 shrink-0">
+          <div className="flex items-center gap-2 min-w-0">
+            <div className="w-7 h-7 rounded-lg bg-violet-600/30 border border-violet-500/30 flex items-center justify-center shrink-0">
+              <Building2 className="w-3.5 h-3.5 text-violet-300" />
             </div>
-          )}
+            <span className="text-base font-semibold text-white tracking-wide truncate">KickSkill Industry</span>
+          </div>
           <button
-            onClick={handleToggle}
-            aria-expanded={expanded}
-            aria-label={expanded ? "Close menu" : "Open menu"}
-            className="group p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
+            onClick={handleCollapse}
+            aria-label="Close menu"
+            className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/8 transition-colors cursor-pointer"
           >
-            <svg className="pointer-events-none" width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4 12L20 12" className="origin-center -translate-y-[7px] transition-all duration-300 [transition-timing-function:cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[315deg]" />
-              <path d="M4 12H20" className="origin-center transition-all duration-300 [transition-timing-function:cubic-bezier(.5,.85,.25,1.8)] group-aria-expanded:rotate-45" />
-              <path d="M4 12H20" className="origin-center translate-y-[7px] transition-all duration-300 [transition-timing-function:cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[135deg]" />
-            </svg>
+            <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Switch workspace */}
-        {expanded && (
-          <div className="px-3 py-2 border-b border-white/6">
-            <button onClick={onSwitchWorkspace} className="w-full flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/4 border border-white/8 text-xs text-white/35 hover:text-white/65 hover:border-white/14 transition-all cursor-pointer">
-              <ArrowUpRight className="w-3 h-3 shrink-0" />
-              <span className="truncate">Switch Workspace</span>
-            </button>
-          </div>
-        )}
+        <div className="px-3 py-2.5 border-b border-white/6">
+          <button
+            onClick={() => {
+              onSwitchWorkspace();
+              handleCollapse();
+            }}
+            className="w-full flex items-center gap-2 px-3 py-2 rounded-xl bg-white/4 border border-white/8 text-xs text-white/50 hover:text-white hover:border-white/14 transition-all cursor-pointer"
+          >
+            <ArrowUpRight className="w-3.5 h-3.5 shrink-0 text-violet-400" />
+            <span className="truncate">Switch to Student View</span>
+          </button>
+        </div>
 
         {/* Main nav */}
-        <div className="flex-1 overflow-y-auto overflow-x-hidden py-3 space-y-0.5 px-2">
+        <div className="flex-1 overflow-y-auto overflow-x-hidden py-3 space-y-0.5 px-3">
           {sidebarNav.map((item) => {
             const isActive = activeSection === item.id;
             return (
               <button
                 key={item.id}
-                onClick={() => onSection(item.id as IndustrySection)}
-                className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-colors cursor-pointer group ${
-                  isActive ? "bg-white/8 text-white border border-white/10" : "text-neutral-400 hover:text-white hover:bg-white/5"
-                } ${expanded ? "justify-start" : "justify-center"}`}
+                onClick={() => {
+                  onSection(item.id as IndustrySection);
+                  handleCollapse();
+                }}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors cursor-pointer group justify-start ${
+                  isActive ? "bg-white/10 text-white border border-white/12" : "text-neutral-400 hover:text-white hover:bg-white/5"
+                }`}
               >
-                <span className={`shrink-0 transition-colors ${isActive ? "text-white" : "group-hover:text-violet-400"}`}>{item.icon}</span>
-                {expanded && <span className="text-sm text-neutral-300 group-hover:text-white truncate">{item.label}</span>}
+                <span className={`shrink-0 transition-colors ${isActive ? "text-violet-400" : "group-hover:text-violet-400"}`}>{item.icon}</span>
+                <span className="text-sm text-neutral-300 group-hover:text-white font-medium truncate">{item.label}</span>
               </button>
             );
           })}
         </div>
 
         {/* Bottom */}
-        <div className="shrink-0 border-t border-white/8 px-2 py-2 space-y-0.5">
+        <div className="shrink-0 border-t border-white/8 px-3 py-2 space-y-0.5">
           {sidebarBottom.map((item) => {
             const isActive = activeSection === item.id;
             return (
-              <button key={item.id} onClick={() => onSection(item.id as IndustrySection)}
-                className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-colors cursor-pointer group ${
-                  isActive ? "bg-white/8 text-white border border-white/10" : "text-neutral-400 hover:text-white hover:bg-white/5"
-                } ${expanded ? "justify-start" : "justify-center"}`}>
-                <span className={`shrink-0 ${isActive ? "text-white" : "group-hover:text-white"}`}>{item.icon}</span>
-                {expanded && <span className="text-sm text-neutral-300 group-hover:text-white truncate">{item.label}</span>}
+              <button
+                key={item.id}
+                onClick={() => {
+                  onSection(item.id as IndustrySection);
+                  handleCollapse();
+                }}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors cursor-pointer group justify-start ${
+                  isActive ? "bg-white/10 text-white border border-white/12" : "text-neutral-400 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                <span className={`shrink-0 ${isActive ? "text-violet-400" : "group-hover:text-white"}`}>{item.icon}</span>
+                <span className="text-sm text-neutral-300 group-hover:text-white font-medium truncate">{item.label}</span>
               </button>
             );
           })}
         </div>
 
         {/* Company identity */}
-        <div className="shrink-0 border-t border-white/8 px-2 py-3">
-          <div className={`flex items-center gap-3 px-3 py-2 rounded-lg ${expanded ? "" : "justify-center"}`}>
-            <div className="w-7 h-7 rounded-full bg-neutral-800 border border-white/10 flex items-center justify-center shrink-0">
+        <div className="shrink-0 border-t border-white/8 px-3 py-3">
+          <div className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/[0.03] border border-white/5">
+            <div className="w-8 h-8 rounded-full bg-neutral-800 border border-white/10 flex items-center justify-center shrink-0">
               <Building2 className="w-4 h-4 text-neutral-400" />
             </div>
-            {expanded && (
-              <div className="min-w-0 flex-1">
-                <p className="text-sm text-white font-medium truncate leading-none mb-0.5">NovaTech</p>
-                <p className="text-xs text-neutral-500 truncate">Technology / AI</p>
-              </div>
-            )}
-            {expanded && (
-              <button
-                onClick={onSignOut}
-                title="Sign out"
-                className="shrink-0 p-1.5 rounded-lg text-neutral-600 hover:text-white hover:bg-white/8 transition-all cursor-pointer"
-              >
-                <LogOut className="w-3.5 h-3.5" />
-              </button>
-            )}
+            <div className="min-w-0 flex-1">
+              <p className="text-sm text-white font-medium truncate leading-none mb-0.5">NovaTech</p>
+              <p className="text-xs text-neutral-500 truncate">Technology / AI</p>
+            </div>
+            <button
+              onClick={() => {
+                onSignOut();
+                handleCollapse();
+              }}
+              title="Sign out"
+              className="shrink-0 p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/8 transition-all cursor-pointer"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </aside>
@@ -1198,18 +1227,18 @@ function AiRecruitingSection({ onPostOpportunity }: { onPostOpportunity: () => v
       style={{ backgroundImage: "url('https://pub-940ccf6255b54fa799a9b01050e6c227.r2.dev/ruixen_moon_2.png')" }}
     >
       {/* Centered heading */}
-      <div className="flex-1 w-full flex flex-col items-center justify-center min-h-0">
-        <div className="text-center pb-8">
-          <h1 className="text-4xl font-semibold drop-shadow-sm shimmer-text">
+      <div className="flex-1 w-full flex flex-col items-center justify-center min-h-0 px-4">
+        <div className="text-center pb-6 sm:pb-8">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold drop-shadow-sm shimmer-text">
             {getGreeting()}, NovaTech.
           </h1>
-          <p className="mt-2 text-neutral-300/70 text-base">Find the right skills, not just the right resumes.</p>
+          <p className="mt-1.5 sm:mt-2 text-neutral-300/70 text-sm sm:text-base">Find the right skills, not just the right resumes.</p>
         </div>
       </div>
 
       {/* Bottom: input + quick actions */}
-      <div className="w-full max-w-[52rem] px-4 pb-[26vh] shrink-0">
-        <div className="relative bg-black/50 backdrop-blur-md rounded-xl border border-white/10 h-[100px] flex flex-col justify-between">
+      <div className="w-full max-w-3xl lg:max-w-4xl px-4 sm:px-6 pb-8 sm:pb-16 md:pb-[20vh] shrink-0 mx-auto">
+        <div className="relative bg-black/60 backdrop-blur-md rounded-2xl border border-white/12 h-[104px] flex flex-col justify-between shadow-2xl">
           <textarea
             ref={textareaRef}
             value={message}
@@ -1237,15 +1266,15 @@ function AiRecruitingSection({ onPostOpportunity }: { onPostOpportunity: () => v
           </div>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 mt-4">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mt-4 max-w-full">
           {quickActions.map((a) => (
             <button
               key={a.label}
               onClick={() => setMessage(a.prompt)}
-              className="flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-white/10 bg-black/50 text-white hover:bg-black/70 hover:border-white/20 transition-colors cursor-pointer"
+              className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full border border-white/10 bg-black/60 text-white text-xs sm:text-sm hover:bg-black/80 hover:border-white/20 transition-colors cursor-pointer"
             >
-              {a.icon}
-              <span className="text-xs">{a.label}</span>
+              <span className="shrink-0">{a.icon}</span>
+              <span className="truncate">{a.label}</span>
             </button>
           ))}
         </div>
@@ -1349,12 +1378,12 @@ export default function IndustryPage({ onSwitchWorkspace, onSignOut }: IndustryP
         onSignOut={onSignOut}
       />
 
-      <div className={`relative flex-1 h-full transition-all duration-300 ease-in-out ${sidebarExpanded ? "ml-[220px]" : "ml-16"}`}>
+      <div className="relative flex-1 w-full h-full">
         {isHome ? (
           <AiRecruitingSection onPostOpportunity={() => setShowPostOpportunity(true)} />
         ) : (
           <div className="h-full overflow-y-auto overflow-x-hidden">
-            <div className="max-w-[1100px] mx-auto px-6 py-8">
+            <div className="max-w-[1100px] mx-auto px-4 sm:px-6 py-4 sm:py-8 pl-16 sm:pl-16">
               {renderSection()}
               <div className="h-12" />
             </div>

@@ -236,7 +236,7 @@ export default function OpportunitiesPage() {
       </div>
 
       {/* Header */}
-      <div className="relative shrink-0 px-8 pt-8 pb-5 border-b border-white/8">
+      <div className="relative shrink-0 px-4 pt-4 sm:px-8 sm:pt-8 pb-5 border-b border-white/8 pl-16 sm:pl-16">
         {/* Breadcrumb */}
         <p className="text-[10px] font-semibold text-neutral-600 uppercase tracking-widest mb-2">
           KickSkill / Opportunities
@@ -265,8 +265,8 @@ export default function OpportunitiesPage() {
           />
         </div>
 
-        {/* Tabs */}
-        <div className="mt-8">
+        {/* Filter tabs */}
+        <div className="pt-6">
           <AnimeNavBar
             items={tabNavItems}
             activeTab={activeTab}
@@ -277,7 +277,7 @@ export default function OpportunitiesPage() {
 
       {/* Main scrollable area */}
       <div className="flex-1 overflow-y-auto">
-        <div className="px-8 py-5">
+        <div className="px-4 sm:px-8 py-5">
           {/* AI match header */}
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">

@@ -157,20 +157,20 @@ export default function SkillsPage({ onNavigate }: { onNavigate: (p: Page) => vo
       </div>
 
       {/* ── Header ────────────────────────────────────────────── */}
-      <div className="relative shrink-0 px-8 pt-8 pb-6 border-b border-white/8">
-<p className="text-[10px] font-semibold text-neutral-600 uppercase tracking-widest mb-2">
+      <div className="relative shrink-0 px-4 pt-4 sm:px-8 sm:pt-8 pb-6 border-b border-white/8 pl-16 sm:pl-16">
+        <p className="text-[10px] font-semibold text-neutral-600 uppercase tracking-widest mb-2">
           KickSkill / Skills
         </p>
-        <div className="flex items-end justify-between gap-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl font-semibold text-white mb-1">Skills</h1>
-            <p className="text-sm text-neutral-500">
+            <p className="text-xs sm:text-sm text-neutral-500">
               Understand your strengths. Identify your gaps. Build what matters.
             </p>
           </div>
           <button
             onClick={() => setShowAssessment(true)}
-            className="shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl border border-violet-500/30 bg-violet-600/15 text-sm text-violet-300 hover:bg-violet-600/25 hover:border-violet-500/50 transition-colors cursor-pointer"
+            className="shrink-0 flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2 rounded-xl border border-violet-500/30 bg-violet-600/15 text-xs sm:text-sm text-violet-300 hover:bg-violet-600/25 hover:border-violet-500/50 transition-colors cursor-pointer"
           >
             <ClipboardCheck className="w-4 h-4" />
             Take Skill Assessment
@@ -180,7 +180,7 @@ export default function SkillsPage({ onNavigate }: { onNavigate: (p: Page) => vo
 
       {/* ── Scrollable body ───────────────────────────────────── */}
       <div className="flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-        <div className="px-8 py-6 space-y-6 w-full">
+        <div className="px-4 sm:px-8 py-4 sm:py-6 space-y-6 w-full">
 
           {/* ── Row 1: Career target + Skill overview ─────────── */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

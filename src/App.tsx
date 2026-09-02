@@ -69,10 +69,10 @@ function QuickAction({ icon, label, onClick }: QuickActionProps) {
   return (
     <button
       onClick={onClick}
-      className="flex items-center gap-2.5 px-6 py-3 rounded-full border border-white/10 bg-black/50 text-white text-base hover:bg-black/70 hover:border-white/20 transition-colors cursor-pointer"
+      className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full border border-white/10 bg-black/60 text-white text-xs sm:text-sm hover:bg-black/80 hover:border-white/20 transition-colors cursor-pointer"
     >
-      {icon}
-      <span className="text-xs">{label}</span>
+      <span className="shrink-0">{icon}</span>
+      <span className="truncate">{label}</span>
     </button>
   );
 }
@@ -111,7 +111,7 @@ const emptySignUp: SignUpData = {
 const glassModal =
   "fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-md";
 const glassPanel =
-  "relative w-full max-w-sm bg-violet-950/30 backdrop-blur-2xl border border-violet-400/10 rounded-2xl p-8 shadow-[0_8px_48px_rgba(0,0,0,0.6)] ring-1 ring-white/5";
+  "relative w-[92%] sm:w-full max-w-sm bg-violet-950/40 backdrop-blur-2xl border border-violet-400/15 rounded-2xl p-6 sm:p-8 shadow-[0_8px_48px_rgba(0,0,0,0.6)] ring-1 ring-white/5 mx-auto";
 const inputCls =
   "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-white/25 focus:bg-white/8 transition-all";
 const labelCls = "block text-xs text-white/40 mb-1.5 tracking-wide uppercase";
@@ -221,42 +221,42 @@ export default function App() {
         />
       )}
       {activePage === "opportunities" && (
-        <div className={`relative h-full transition-all duration-300 ease-in-out ${sidebarExpanded ? "ml-[220px]" : "ml-16"}`}>
+        <div className="relative w-full h-full">
           <OpportunitiesPage />
         </div>
       )}
       {activePage === "skills" && (
-        <div className={`relative h-full transition-all duration-300 ease-in-out ${sidebarExpanded ? "ml-[220px]" : "ml-16"}`}>
+        <div className="relative w-full h-full">
           <SkillsPage onNavigate={setActivePage} />
         </div>
       )}
       {activePage === "learning" && (
-        <div className={`relative h-full transition-all duration-300 ease-in-out ${sidebarExpanded ? "ml-[220px]" : "ml-16"}`}>
+        <div className="relative w-full h-full">
           <LearningPage />
         </div>
       )}
       {activePage === "skill-passport" && (
-        <div className={`relative h-full transition-all duration-300 ease-in-out ${sidebarExpanded ? "ml-[220px]" : "ml-16"}`}>
+        <div className="relative w-full h-full">
           <SkillPassportPage onNavigate={setActivePage} />
         </div>
       )}
       {activePage === "applications" && (
-        <div className={`relative h-full transition-all duration-300 ease-in-out ${sidebarExpanded ? "ml-[220px]" : "ml-16"}`}>
+        <div className="relative w-full h-full">
           <ApplicationsPage onNavigate={setActivePage} />
         </div>
       )}
       {activePage === "agent-activity" && (
-        <div className={`relative h-full transition-all duration-300 ease-in-out ${sidebarExpanded ? "ml-[220px]" : "ml-16"}`}>
+        <div className="relative w-full h-full">
           <AgentActivityPage onNavigate={setActivePage} />
         </div>
       )}
       {activePage === "career-goal" && (
-        <div className={`relative h-full transition-all duration-300 ease-in-out ${sidebarExpanded ? "ml-[220px]" : "ml-16"}`}>
+        <div className="relative w-full h-full">
           <CareerGoalPage onNavigate={setActivePage} />
         </div>
       )}
       {activePage === "settings" && (
-        <div className={`relative h-full transition-all duration-300 ease-in-out ${sidebarExpanded ? "ml-[220px]" : "ml-16"}`}>
+        <div className="relative w-full h-full">
           <SettingsPage onNavigate={setActivePage} />
         </div>
       )}
@@ -274,25 +274,25 @@ export default function App() {
         </div>
       )}
       <div
-        className={`relative h-full bg-cover bg-center flex flex-col items-center overflow-hidden transition-all duration-300 ease-in-out ${sidebarExpanded ? "ml-[220px]" : "ml-16"} ${activePage !== "home" ? "hidden" : ""}`}
+        className={`relative w-full h-full bg-cover bg-center flex flex-col items-center overflow-hidden ${activePage !== "home" ? "hidden" : ""}`}
         style={{
           backgroundImage:
             "url('https://pub-940ccf6255b54fa799a9b01050e6c227.r2.dev/ruixen_moon_2.png')",
         }}
       >
         {/* Top-right auth */}
-        <div className="absolute top-6 right-6 flex items-center gap-3 z-10">
+        <div className="absolute top-3.5 right-3.5 sm:top-6 sm:right-6 flex items-center gap-3 z-10">
           {isAuthenticated ? (
             <button
               onClick={() => { setIsAuthenticated(false); setUserName(""); setActivePage("role-select"); }}
-              className="px-4 py-1.5 rounded-lg text-sm border border-neutral-700 bg-black/40 backdrop-blur-sm text-neutral-300 hover:text-white hover:bg-neutral-700 transition-colors cursor-pointer"
+              className="px-3 py-1.5 sm:px-4 sm:py-1.5 rounded-lg text-xs sm:text-sm border border-neutral-700 bg-black/40 backdrop-blur-sm text-neutral-300 hover:text-white hover:bg-neutral-700 transition-colors cursor-pointer"
             >
               Sign Out
             </button>
           ) : (
             <button
               onClick={() => setShowSignIn(true)}
-              className="px-4 py-1.5 rounded-lg text-sm border border-white/10 bg-black/50 backdrop-blur-md text-neutral-200 hover:text-white hover:bg-black/70 hover:border-white/20 transition-colors cursor-pointer"
+              className="px-3 py-1.5 sm:px-4 sm:py-1.5 rounded-lg text-xs sm:text-sm border border-white/10 bg-black/50 backdrop-blur-md text-neutral-200 hover:text-white hover:bg-black/70 hover:border-white/20 transition-colors cursor-pointer"
             >
               Sign In
             </button>
@@ -303,16 +303,16 @@ export default function App() {
         <div className="flex-1 w-full overflow-y-auto min-h-0" />
 
         {/* Fixed bottom: title + input + quick actions */}
-        <div className="w-[56rem] px-4 pb-[28vh] shrink-0">
-          <div className="text-center mb-20">
-            <h1 className="text-4xl font-semibold drop-shadow-sm shimmer-text">
+        <div className="w-full max-w-3xl lg:max-w-4xl px-4 sm:px-6 pb-8 sm:pb-16 md:pb-[20vh] shrink-0 mx-auto">
+          <div className="text-center mb-6 sm:mb-12 md:mb-16">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold drop-shadow-sm shimmer-text">
               {isAuthenticated ? `${getGreeting()}, ${userName}.` : "KickSkill AI"}
             </h1>
             {isAuthenticated && (
-              <p className="mt-2 text-neutral-200">What are we working toward today?</p>
+              <p className="mt-1.5 sm:mt-2 text-sm sm:text-base text-neutral-200">What are we working toward today?</p>
             )}
           </div>
-          <div className="relative bg-black/50 backdrop-blur-md rounded-xl border border-white/10 h-[100px] flex flex-col justify-between">
+          <div className="relative bg-black/60 backdrop-blur-md rounded-2xl border border-white/12 h-[104px] flex flex-col justify-between shadow-2xl">
             <textarea
               ref={textareaRef}
               value={message}
@@ -345,7 +345,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-3 mt-4">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mt-4 max-w-full">
             {quickActions.map((a) => (
               <QuickAction
                 key={a.label}

@@ -634,15 +634,15 @@ export default function SettingsPage({ onNavigate }: SettingsPageProps) {
 
   return (
     <div className="h-full overflow-y-auto overflow-x-hidden bg-black">
-      <div className="max-w-[1100px] mx-auto px-6 py-8">
+      <div className="max-w-[1100px] mx-auto px-4 sm:px-6 py-4 sm:py-8 pl-16 sm:pl-16">
 
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white/92 mb-1">Profile & Settings</h1>
-          <p className="text-sm text-white/38">Manage your identity, preferences and KickSkill experience.</p>
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white/92 mb-1">Profile & Settings</h1>
+          <p className="text-xs sm:text-sm text-white/38">Manage your identity, preferences and KickSkill experience.</p>
         </div>
 
-        <div className="flex gap-6 items-start">
+        <div className="flex flex-col sm:flex-row gap-6 items-start w-full">
 
           {/* Settings nav — vertical on desktop, horizontal on mobile */}
           <nav className="shrink-0 w-full sm:w-48 xl:w-52">
